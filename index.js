@@ -8,7 +8,6 @@ class SariraGenerationSound {
         this.directory = "./sarira_beats.mp3"
         this.hasStarted = false
 
-
 ///////////////////////////////////////////////////////////////////////////
         //조작법 : 화면에 떠 있는 작은 버튼을 클릭 
         ///////변수들
@@ -29,7 +28,6 @@ class SariraGenerationSound {
         this.freeverb_wet = 0.5 //range 0,1
 ///////////////////////////////////////////////////////////////////////////
 
-
         this.sourceNode = new Tone.BufferSource()
         this.splitNode = new Tone.Split();
         this.mergeNode = new Tone.Merge()
@@ -38,9 +36,7 @@ class SariraGenerationSound {
         this.frequency_shift_leftNode = new Tone.FrequencyShifter(this.frequency_left)
         this.frequency_shift_rightNode = new Tone.FrequencyShifter(this.frequency_right)
         this.pitchShift_leftNode = new Tone.PitchShift(this.pitch_left)
-        // this.pitchShift_leftNode.feedback.value=0
         this.pitchShift_rightNode = new Tone.PitchShift(this.pitch_right)
-        // this.pitchShift_rightNode.feedback.value=0
         const damp = 830
         this.freeverbNode = new Tone.Freeverb(this.roomsize, damp)
         this.freeverbNode.wet.value = this.freeverb_wet; //max is 1
