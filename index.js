@@ -1,8 +1,17 @@
+//using tone.js effects
+//https://tonejs.github.io/docs/14.7.77/
+
+
 ////////////////////////////////////////////////////////
 class SariraGenerationSound {
     constructor() {
         this.directory = "./sarira_beats.mp3"
-        this.hasStarted=false
+        this.hasStarted = false
+
+
+///////////////////////////////////////////////////////////////////////////
+        //조작법 : 화면에 떠 있는 작은 버튼을 클릭 
+        ///////변수들
 
         //1.delay
         this.feedbackRate = 0 //range = 0 ,1
@@ -17,9 +26,9 @@ class SariraGenerationSound {
         //3.convol reverb
         this.roomsize = 0.7 // 추가된 항목. range 0,1
         this.freeverb_wet = 0.5 //range 0,1
+///////////////////////////////////////////////////////////////////////////
 
 
-        ////////////////////////////////////
         this.sourceNode = new Tone.BufferSource()
         this.splitNode = new Tone.Split();
         this.mergeNode = new Tone.Merge()
@@ -41,7 +50,7 @@ class SariraGenerationSound {
         const RIGHT = 1
         const MONO = 0
 
-        let buffer = new Tone.Buffer(this.directory,()=> {
+        let buffer = new Tone.Buffer(this.directory, () => {
             this.sourceNode.buffer = buffer.get();
             this.sourceNode.loop = true;
             this.sourceNode.start()
@@ -59,10 +68,10 @@ class SariraGenerationSound {
     }
 
     async start() {
-        if(!this.hasStarted){
-        await Tone.start()
-        this.hasStarted=true
-        console.log("tone has started")
+        if (!this.hasStarted) {
+            await Tone.start()
+            this.hasStarted = true
+            console.log("tone has started")
         }
 
     }
@@ -83,77 +92,18 @@ class SariraGenerationSound {
         this.frequency_left = MyMath.map(height, 0, 4, 100, -100)
         this.frequency_right = MyMath.map(width, 0, 4, 100 - 100)
 
-        this.pitchShift_leftNode.pitch= this.pitch_left
+        this.pitchShift_leftNode.pitch = this.pitch_left
         this.pitchShift_rightNode = this.pitch_right
 
-        this.frequency_shift_leftNode.freqeuncy=this.frequency_left 
-        this.frequency_shift_rightNode.freqeuncy=this.frequency_right
+        this.frequency_shift_leftNode.freqeuncy = this.frequency_left
+        this.frequency_shift_rightNode.freqeuncy = this.frequency_right
     }
-
-
-
-
 }
-//using tone.js effects
-//https://tonejs.github.io/docs/14.7.77/
 
-//조작법 : 화면에 떠 있는 작은 버튼을 클릭 
-///////변수들
-
-//1.delay
-// let feedbackRate = 0.8 //range = 0 ,1
-
-// //2.tranpose
-// let pitch_left = 0 //range -60 , 60
-// let pitch_right = -0 //range -60 , 60
-
-// let frequency_left = 100 //range -100, 100 
-// let frequency_right = -100 //range -100, 100 
-
-// //3.convol reverb
-// const roomsize=0.3 // 추가된 항목. range 0,1
-// let freeverb_wet = 0.5//range 0,1
-
-
-////////////////////////////////////////////////////////////////////
 document.querySelector('button').addEventListener('click', async () => {
     await Tone.start()
     console.log('audio is ready')
 })
 
-// const source = new Tone.BufferSource()
-// const split = new Tone.Split();
-// const merge = new Tone.Merge()
-
-// const delayTime=0.6
-// const feedbackDelay = new Tone.FeedbackDelay(delayTime,  feedbackRate)
-
-// const frequency_shift_left = new Tone.FrequencyShifter(frequency_left)
-// const frequency_shift_right = new Tone.FrequencyShifter(frequency_right)
-// const pitchShift_left = new Tone.PitchShift(pitch_left)
-// const pitchShift_right = new Tone.PitchShift(pitch_right)
-
-// const damp=830
-// const freeverb = new Tone.Freeverb(0.3, damp)
-// freeverb.wet.value = freeverb_wet; //max is 1
-
-// var buffer = new Tone.Buffer("./sarira_beats.mp3", function () {
-//     source.buffer = buffer.get();
-//     source.loop = true;
-//     source.start()
-
-//     Tone.connect(source, split)
-//     split.connect(frequency_shift_left, 0, 0)
-//     split.connect(frequency_shift_right, 1, 0)
-//     frequency_shift_left.connect(pitchShift_left)
-//     frequency_shift_right.connect(pitchShift_right)
-
-//     pitchShift_left.connect(merge, 0, 0)
-//     pitchShift_right.connect(merge, 0, 1)
-//     Tone.connectSeries(merge, feedbackDelay, freeverb, Tone.Destination)
-// })
-
-
-let sg=new SariraGenerationSound();
+let sg = new SariraGenerationSound();
 sg.setup();
-
