@@ -13,17 +13,18 @@ class SariraGenerationSound {
         //조작법 : 화면에 떠 있는 작은 버튼을 클릭 
         ///////변수들
 
-        //1.delay
+        //1.Feedback delay    https://tonejs.github.io/docs/14.7.77/FeedbackDelay
         this.feedbackRate = 0 //range = 0 ,1
 
-        //2.tranpose
+        //2.PitchShfit  https://tonejs.github.io/docs/14.7.77/PitchShift
         this.pitch_left = -6 //range -60 , 60
         this.pitch_right = -6 //range -60 , 60
 
+        //FrequencyShifter  https://tonejs.github.io/docs/14.7.77/FrequencyShifter
         this.frequency_left = 0 //range -100, 100 
         this.frequency_right = 0 //range -100, 100 
 
-        //3.convol reverb
+        //3.Freeverb    https://tonejs.github.io/docs/14.7.77/Freeverb
         this.roomsize = 0.7 // 추가된 항목. range 0,1
         this.freeverb_wet = 0.5 //range 0,1
 ///////////////////////////////////////////////////////////////////////////
